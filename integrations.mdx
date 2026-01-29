@@ -1,0 +1,182 @@
+---
+title: Integrations and Extensions
+description: Connect Rock with third-party tools to enhance your documentation workflow.
+---
+
+## Overview
+
+Rock supports seamless integrations with popular third-party tools, allowing you to embed content, automate workflows, and extend functionality. Use built-in integrations for GitHub and Slack, or leverage the API and webhooks for custom solutions. You can also export your documentation to various formats for sharing outside the platform.
+
+<Callout kind="info">
+Rock's integrations prioritize security and ease of use. Always review permissions when connecting external services.
+</Callout>
+
+## Supported Integrations
+
+Connect Rock directly with essential tools to streamline your documentation process.
+
+<Columns cols={3}>
+  <Card title="GitHub" icon="github" href="https://github.com">
+    Sync repositories, embed code snippets, and trigger builds from your docs.
+  </Card>
+  <Card title="Slack" icon="message-circle" href="https://slack.com">
+    Send notifications for updates, comments, and page changes.
+  </Card>
+  <Card title="Zapier" icon="zap" href="https://zapier.com">
+    Automate workflows with 5000+ apps using no-code zaps.
+  </Card>
+</Columns>
+
+## Embedding External Content
+
+Embed widgets and content from external services directly into your Rock pages.
+
+<Tabs>
+  <Tab title="GitHub Gist" icon="code">
+    Paste your Gist URL to embed live, editable code.
+
+    ```
+    https://gist.github.com/username/abc123def456
+    ```
+
+    Rock renders it as an interactive code block with syntax highlighting.
+  </Tab>
+  <Tab title="YouTube Video" icon="video">
+    Embed videos by adding the embed URL.
+
+    <Image
+      src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
+      alt="Sample YouTube thumbnail"
+      width="560"
+      height="315"
+    />
+
+    Use the share link format: `https://youtube.com/embed/VIDEO_ID`.
+  </Tab>
+  <Tab title="Figma" icon="figma">
+    Embed Figma prototypes for design reviews.
+
+    ```
+    https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/...
+    ```
+  </Tab>
+</Tabs>
+
+## API Access for Custom Integrations
+
+Access Rock's API to build custom integrations. Authenticate with your API key.
+
+<ParamField header="Authorization" param-type="string" required="true">
+  Bearer `{YOUR_API_KEY}`.
+</ParamField>
+
+<ParamField query="spaceId" param-type="string" required="true">
+  Target documentation space identifier.
+</ParamField>
+
+Here is an example to fetch page content:
+
+<Request tabs="JavaScript,cURL">
+  ```javascript
+  const response = await fetch('https://api.example.com/v1/pages?spaceId=YOUR_SPACE_ID', {
+    headers: {
+      'Authorization': 'Bearer YOUR_API_KEY'
+    }
+  });
+  const pages = await response.json();
+  console.log(pages);
+  ```
+  ```bash
+  curl -H "Authorization: Bearer YOUR_API_KEY" \
+       "https://api.example.com/v1/pages?spaceId=YOUR_SPACE_ID"
+  ```
+</Request>
+
+<Response tabs="200">
+  ```json
+  {
+    "pages": [
+      {
+        "id": "page-123",
+        "title": "Introduction",
+        "content": "Welcome to Rock..."
+      }
+    ]
+  }
+  ```
+</Response>
+
+## Webhook Setup for Notifications
+
+Set up webhooks to receive real-time events like page updates or comments.
+
+<Steps>
+  <Step title="Create Webhook" icon="plus">
+    Navigate to Settings > Integrations > Webhooks and click "New Webhook".
+  </Step>
+  <Step title="Configure Events" icon="settings">
+    Select events: `page.updated`, `comment.added`.
+  </Step>
+  <Step title="Add Endpoint" icon="link">
+    Enter your endpoint URL, e.g., `https://your-webhook-url.com/rock`.
+  </Step>
+  <Step title="Test and Save" icon="check-circle">
+    Send a test event and verify receipt.
+  </Step>
+</Steps>
+
+Example payload handler in Node.js:
+
+<CodeGroup tabs="Node.js,Python">
+  ```javascript
+  const express = require('express');
+  const app = express();
+  app.use(express.json());
+
+  app.post('/rock', (req, res) => {
+    console.log('Event:', req.body.event);
+    console.log('Page:', req.body.page);
+    res.status(200).send('OK');
+  });
+
+  app.listen(3000);
+  ```
+  ```python
+  from flask import Flask, request
+
+  app = Flask(__name__)
+
+  @app.route('/rock', methods=['POST'])
+  def webhook():
+      data = request.json
+      print(f"Event: {data['event']}")
+      print(f"Page: {data['page']}")
+      return 'OK', 200
+
+  app.run(port=3000)
+  ```
+</CodeGroup>
+
+## Exporting Documentation
+
+Export your Rock spaces to share externally.
+
+| Format     | Use Case                  | Steps                          |
+|------------|---------------------------|--------------------------------|
+| PDF        | Printable reports         | Settings > Export > PDF        |
+| Markdown   | GitHub repos, blogs       | Bulk export all pages          |
+| HTML       | Static websites           | Generate ZIP with assets       |
+| JSON       | API imports, backups      | Full space structure           |
+
+<Callout kind="tip">
+Start with GitHub or Slack integrations for quick wins, then explore the API for advanced automation.
+</Callout>
+
+<Columns cols={2}>
+  <Card title="API Reference" icon="book-open" href="/authentication">
+    Detailed endpoint documentation.
+  </Card>
+  <Card title="Troubleshooting" icon="help-circle" href="/help-center">
+    Common integration issues.
+  </Card>
+</Columns>

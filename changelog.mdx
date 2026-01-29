@@ -1,0 +1,118 @@
+---
+title: Changelog
+description: Track the latest updates and improvements to Rock's documentation platform.
+---
+
+## Overview
+
+Stay informed about the latest releases, bug fixes, and improvements to Rock. You receive notifications for major updates through your dashboard at `https://dashboard.example.com`.
+
+<Callout kind="info">
+Rock follows semantic versioning (SemVer): `MAJOR.MINOR.PATCH`. 
+- **MAJOR**: Breaking changes
+- **MINOR**: New features backward-compatible
+- **PATCH**: Bug fixes backward-compatible
+</Callout>
+
+| Version Type | Impact | Example |
+|--------------|--------|---------|
+| `MAJOR` (e.g., 2.0.0) | Breaking changes | API restructuring |
+| `MINOR` (e.g., 1.1.0) | New features | Added search functionality |
+| `PATCH` (e.g., 1.0.1) | Bug fixes | Fixed rendering issues |
+
+## Recent Updates
+
+<Update label="2024-10-15" description="v1.2.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Added real-time collaboration editing for documentation pages
+- Introduced customizable themes with your brand color `#ED1C24`
+
+## Improvements
+
+- Enhanced search performance by `>50%`
+- Better mobile responsiveness for all components
+
+## Bug Fixes
+
+- Fixed parsing errors in nested code blocks
+- Resolved anchor link navigation issues
+
+</Update>
+
+<Update label="2024-09-20" description="v1.1.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Integrated Mermaid diagram support (code block only)
+- Added dark mode toggle in the documentation viewer
+
+## Bug Fixes
+
+- Corrected JSX attribute parsing for arrays like `tags={["feature"]}`
+- Fixed table rendering on narrow screens
+
+## Improvements
+
+- Optimized image loading with lazy attributes
+
+</Update>
+
+<Update label="2024-08-10" description="v1.0.0" tags={["feature", "breaking"]}>
+
+## Breaking Changes
+
+- Removed legacy `<Mermaid>` component; use code blocks instead
+- Updated attribute syntax to require double quotes: `title="Text"`
+
+## New Features
+
+- Full MDX component suite: Steps, Tabs, Cards, Update, and more
+- API documentation components: `<ParamField>`, `<Request>`, `<Response>`
+
+## Initial Setup
+
+- Core documentation rendering engine
+- Frontmatter validation and parsing
+
+</Update>
+
+## Upcoming Roadmap
+
+<Columns cols={3}>
+
+<Card title="AI Assistance" icon="zap" href="/docs/ai-features">
+
+Coming soon: AI-powered content generation and summaries.
+
+</Card>
+
+<Card title="Advanced Analytics" icon="bar-chart-3" href="/docs/analytics">
+
+Track documentation usage and engagement metrics.
+
+</Card>
+
+<Card title="Multi-language Support" icon="globe" href="/docs/localization">
+
+Full i18n for global teams.
+
+</Card>
+
+</Columns>
+
+<Callout kind="tip" title="Get Involved">
+Suggest features or report issues at `https://github.com/rock-docs`. You help shape the future of Rock documentation.
+</Callout>
+
+<Expandable title="Deprecations" default-open="false">
+
+## Planned Deprecations
+
+- Single quotes in JSX attributes (use double quotes)
+- H1 headings in body content (use frontmatter title)
+
+These changes ensure better parsing reliability.
+
+</Expandable>
